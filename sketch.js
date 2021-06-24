@@ -12,6 +12,7 @@ function preload() {
   bananaImage = loadImage("banana.png");
   obstacleImage = loadImage("obstacle.png");
   gameOver1 = loadImage("GameOver.jpg");
+  bg = loadImage("bg.jpg")
 
 }
 
@@ -19,6 +20,8 @@ function preload() {
 
 function setup() {
   createCanvas(600, 400);
+  ground = createSprite(400, 350, 900, 10);
+  // ground.addImage(bg);
   monkey = createSprite(70, 300, 20, 20);
   monkey.addAnimation("running", monkey_running);
   monkey.scale = 0.1;
@@ -30,12 +33,12 @@ function setup() {
   gameOver.scale = 0.4;
 
   
-  ground = createSprite(400, 350, 900, 10);
+  
 }
 
 
 function draw() {
-  background("white");
+  background(bg);
   if (gameState === 1) {
      gameOver.visible = false
     monkey.velocityY = monkey.velocityY + 2;
@@ -94,7 +97,6 @@ function draw() {
   monkey.collide(ground)  
   drawSprites();
   console.log(gameState);
-  
  
 }
 
@@ -105,6 +107,8 @@ function fruits() {
     fruit.scale = 0.07;
     fruit.velocityX = -10;
     fruit.lifetime = 100;
+    camera.position.x=300;
+    camera.position.y=fruit.y;
     FoodGroup.add(fruit);
 
   }
@@ -120,6 +124,8 @@ function obstacle() {
     obstacles.velocityX = -10;
     obstacles.lifetime = 100;
     obstaclesGroup.add(obstacles);
+    
+
 
   }
 }
